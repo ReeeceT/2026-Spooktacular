@@ -1,4 +1,4 @@
-package frc.robot.Subsystems;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.SparkMax;
@@ -17,9 +17,9 @@ public class DriveSubsys extends SubsystemBase {
         LEFT_MOTORS = Constants.MotorControllers.LEFT_MOTOR;
     }
 
-    public void driveForward() {
-        RIGHT_MOTORS.set(0.1);
-        LEFT_MOTORS.set(0.1);
+    public void driveForward(double leftY, double rightY) {
+        RIGHT_MOTORS.set(rightY);
+        LEFT_MOTORS.set(leftY);
     }
 
     public void brake() {

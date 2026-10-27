@@ -4,9 +4,9 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import com.revrobotics.spark.config.SparkBaseConfig;
+import frc.robot.subsystems.DriveSubsys;
 
-import frc.robot.Subsystems.DriveSubsys;
+import com.revrobotics.spark.config.SparkBaseConfig;
 
 public final class Constants {
     public final class Controllers {
@@ -31,5 +31,13 @@ public final class Constants {
 
     public final class Subsystems {
         public static final DriveSubsys DS = new DriveSubsys();
+    }
+
+    public final class digitalConstants {
+        public static final double JOYSTICK_Y_DEADBAND = 0.1;
+    }
+
+    public enum CommandEnums {
+        DRIVE_CMD;
     }
 }
