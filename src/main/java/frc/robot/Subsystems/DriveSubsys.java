@@ -5,6 +5,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.REVLibError;
 
 import frc.robot.Constants;
@@ -12,26 +13,40 @@ import frc.robot.Constants;
 public class DriveSubsys extends SubsystemBase {
     private final SparkMax RIGHT_SIDE;
     private final SparkMax LEFT_SIDE;
-    private REVLibError sparkMaxError = com.revrobotics.REVLibError.kOk;
 
     public DriveSubsys() {
-        super();
-
-        RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
-        sparkMaxError = Constants.MotorControllers.BR_MOTOR.configure(
-            new SparkMaxConfig().follow(Constants.CAN_IDs.FR_MOTOR_ID), 
-            ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
-            PersistMode.kPersistParameters
-        );
-        if (sparkMaxError != REVLibError.kOk) System.out.println("Something went wrong with the BR motor controller, see DriveSubsys.java");
-
         LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
-        sparkMaxError = Constants.MotorControllers.BL_MOTOR.configure(
-            new SparkMaxConfig().follow(Constants.CAN_IDs.FL_MOTOR_ID), 
+        RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
+
+        LEFT_SIDE.configure(
+            new SparkMaxConfig()
+                .idleMode(IdleMode.kCoast), 
             ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
             PersistMode.kPersistParameters
         );
-        if (sparkMaxError != REVLibError.kOk) System.out.println("Something went wrong with the BL motor controller, see DriveSubsys.java");
+
+        RIGHT_SIDE.configure(
+            new SparkMaxConfig()
+                .idleMode(IdleMode.kCoast), 
+            ResetMode.kResetSafeParameters, 
+            PersistMode.kPersistParameters
+        );
+
+        Constants.MotorControllers.BL_MOTOR.configure(
+            new SparkMaxConfig()
+                .follow(Constants.CAN_IDs.FL_MOTOR_ID)
+                .idleMode(IdleMode.kCoast), 
+            ResetMode.kResetSafeParameters,
+            PersistMode.kPersistParameters
+        );
+
+        Constants.MotorControllers.BR_MOTOR.configure(
+            new SparkMaxConfig()
+                .follow(Constants.CAN_IDs.FR_MOTOR_ID)
+                .idleMode(IdleMode.kCoast), 
+            ResetMode.kResetSafeParameters, 
+            PersistMode.kPersistParameters
+        );
     }
 
     /**
