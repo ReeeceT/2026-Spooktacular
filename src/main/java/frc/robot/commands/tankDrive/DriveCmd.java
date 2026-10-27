@@ -15,10 +15,9 @@ public class DriveCmd extends Command {
     private double rightX;
 
     public DriveCmd(DriveSubsys DS, CommandXboxController Xbox) {
-        super();
-
         this.DS = DS;
         this.Xbox = Xbox;
+        addRequirements(DS); // For the purpose of letting the command scheduler know that this subsytem is a resource of this command.
     }
 
     @Override
@@ -39,10 +38,7 @@ public class DriveCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("The drive command has ended?! That's bad");
-        if (interrupted == true) {
-            System.out.println("The drive command was interrupted");
-        }
+
     }
 
 }
