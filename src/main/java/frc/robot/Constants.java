@@ -27,10 +27,10 @@ public final class Constants {
 
     public final class CAN_IDs {
         public static final int FR_MOTOR_ID = 1;
-        public static final int BR_MOTOR_ID = 2; // Follows RF 
+        public static final int BR_MOTOR_ID = 2; // Follows FR
 
         public static final int FL_MOTOR_ID = 3;
-        public static final int BL_MOTOR_ID = 4; // Follows LF
+        public static final int BL_MOTOR_ID = 4; // Follows FL
     }
 
     public final class DigitalConstants {

@@ -49,15 +49,23 @@ public class DriveSubsys extends SubsystemBase {
     }
 
     /**
-     * @param leftY   - Speed of each side is determined by this parameter
-     * @param rightX  - Turning is determined by this parameter
-     * 
+     * @param leftY   - Throttle
+     * @param rightX  - Steering
      */
     public void drive(double leftY, double rightX) {
         // Assuming that left on the joystick is -1, and right is +1, if not, just swap the signs in the ternaries
-        // lol this is unbelievably disgusting and nearly unreadable
+        // lol this is unbelievably disgusting and completely unnecessary
         LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
         RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
+
+        // In case of emergency, break glass (/* */)
+        /*  
+        double leftSpeed = leftY + rightX;
+        double rightSpeed = leftY - rightX;
+        
+        leftSide.set(Math.clamp(leftSpeed, -1.0, 1.0));
+        rightSide.set(Math.clamp(rightSpeed, -1.0, 1.0));
+        */
     }
 
     public void brake() {
