@@ -11,8 +11,6 @@ import frc.robot.Constants.CommandEnums;
 import frc.robot.commands.CommandFactory;
 
 public class Robot extends TimedRobot {
-    public Robot() {}
-
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
@@ -33,8 +31,5 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopExit() {}
 
-    @Override
-    public void testInit() {
-        CommandScheduler.getInstance().cancelAll();
-    }
+    public Robot() {}
 }
