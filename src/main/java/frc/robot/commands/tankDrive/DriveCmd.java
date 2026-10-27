@@ -23,10 +23,10 @@ public class DriveCmd extends Command {
     @Override
     public void execute() {
         leftY = Xbox.getLeftY();
-        leftY = leftY > DigitalConstants.JOYSTICK_DEADBAND ? leftY : 0; 
+        leftY = Math.abs(leftY) > DigitalConstants.JOYSTICK_DEADBAND ? leftY : 0; 
 
         rightX = Xbox.getRightX();
-        rightX = rightX > DigitalConstants.JOYSTICK_DEADBAND ? rightX : 0; 
+        rightX = Math.abs(rightX) > DigitalConstants.JOYSTICK_DEADBAND ? rightX : 0; 
 
         DS.drive(leftY, rightX);
     }
