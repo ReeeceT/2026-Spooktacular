@@ -16,8 +16,6 @@ public class DriveSubsys extends SubsystemBase {
 
     public DriveSubsys() {
         LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
-        RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
-
         LEFT_SIDE.configure(
             new SparkMaxConfig()
                 .idleMode(IdleMode.kCoast), 
@@ -25,6 +23,7 @@ public class DriveSubsys extends SubsystemBase {
             PersistMode.kPersistParameters
         );
 
+        RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
         RIGHT_SIDE.configure(
             new SparkMaxConfig()
                 .idleMode(IdleMode.kCoast), 
