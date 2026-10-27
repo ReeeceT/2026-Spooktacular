@@ -7,7 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.DriveCmd;
+
+import frc.robot.commands.tankDrive.DriveCmd;
+import frc.robot.Constants.CommandEnums;
+import frc.robot.commands.CommandFactory;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -53,7 +56,10 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    CommandScheduler.getInstance().schedule(new DriveCmd());
+    // maybe make the command factory throw an error, and then use a try-catch block everytime something like this is done.
+    CommandScheduler.getInstance().schedule(
+      CommandFactory.getCommand(CommandEnums.DRIVE_CMD)
+    );
   }
 
   @Override

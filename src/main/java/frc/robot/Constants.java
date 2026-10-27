@@ -33,7 +33,7 @@ public final class Constants {
         public static final DriveSubsys DS = new DriveSubsys();
     }
 
-    public final class digitalConstants {
+    public final class DigitalConstants {
         public static final double JOYSTICK_Y_DEADBAND = 0.1;
     }
 

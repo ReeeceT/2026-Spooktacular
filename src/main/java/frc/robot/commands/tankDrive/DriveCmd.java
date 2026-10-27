@@ -1,8 +1,8 @@
-package frc.robot.Commands;
+package frc.robot.commands.tankDrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.DriveSubsys;
-import frc.robot.Constants.digitalConstants;
+import frc.robot.subsystems.DriveSubsys;
+import frc.robot.Constants.DigitalConstants;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 
@@ -29,12 +29,12 @@ public class DriveCmd extends Command {
     @Override
     public void execute() {
         leftY = Xbox.getLeftY();
-        leftY = leftY > digitalConstants.JOYSTICK_Y_DEADBAND ? leftY : 0; // Apply Deadband
+        leftY = leftY > DigitalConstants.JOYSTICK_Y_DEADBAND ? leftY : 0; // Apply Deadband
 
         rightY = Xbox.getRightY();
-        rightY = rightY > digitalConstants.JOYSTICK_Y_DEADBAND ? rightY : 0; // Apply Deadband
+        rightY = rightY > DigitalConstants.JOYSTICK_Y_DEADBAND ? rightY : 0; // Apply Deadband
 
-        DS.driveForward(leftY, rightY);
+        DS.drive(leftY, rightY);
     }
 
     @Override

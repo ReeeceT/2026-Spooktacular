@@ -17,7 +17,7 @@ public class DriveSubsys extends SubsystemBase {
         LEFT_MOTORS = Constants.MotorControllers.LEFT_MOTOR;
     }
 
-    public void driveForward(double leftY, double rightY) {
+    public void drive(double leftY, double rightY) {
         RIGHT_MOTORS.set(rightY);
         LEFT_MOTORS.set(leftY);
     }
