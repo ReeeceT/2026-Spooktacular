@@ -5,29 +5,33 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.REVLibError;
 
 import frc.robot.Constants;
 
 public class DriveSubsys extends SubsystemBase {
     private final SparkMax RIGHT_SIDE;
     private final SparkMax LEFT_SIDE;
+    private REVLibError sparkMaxError = com.revrobotics.REVLibError.kOk;
 
     public DriveSubsys() {
         super();
 
         RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
-        Constants.MotorControllers.BR_MOTOR.configure(
+        sparkMaxError = Constants.MotorControllers.BR_MOTOR.configure(
             new SparkMaxConfig().follow(Constants.CAN_IDs.FR_MOTOR_ID), 
             ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
             PersistMode.kPersistParameters
         );
+        if (sparkMaxError != REVLibError.kOk) System.out.println("Something went wrong with the BR motor controller, see DriveSubsys.java");
 
         LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
-        Constants.MotorControllers.BL_MOTOR.configure(
+        sparkMaxError = Constants.MotorControllers.BL_MOTOR.configure(
             new SparkMaxConfig().follow(Constants.CAN_IDs.FL_MOTOR_ID), 
             ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
             PersistMode.kPersistParameters
         );
+        if (sparkMaxError != REVLibError.kOk) System.out.println("Something went wrong with the BL motor controller, see DriveSubsys.java");
     }
 
     /**
@@ -37,8 +41,9 @@ public class DriveSubsys extends SubsystemBase {
      */
     public void drive(double leftY, double rightX) {
         // Assuming that left on the joystick is -1, and right is +1
-        if (rightX < 0) LEFT_SIDE.set(leftY - Math.abs(rightX));
-        if (rightX > 0) RIGHT_SIDE.set(leftY - Math.abs(rightX));
+        // lol this looks so ugly and unecessary im leaving it in
+        LEFT_SIDE.set((rightX > 0) ? (leftY - Math.abs(rightX)) : leftY);
+        RIGHT_SIDE.set((rightX < 0) ? (leftY - Math.abs(rightX)) : leftY);
     }
 
     public void brake() {
