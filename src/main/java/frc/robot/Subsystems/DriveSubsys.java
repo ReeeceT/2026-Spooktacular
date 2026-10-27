@@ -7,23 +7,25 @@ import com.revrobotics.spark.config.SparkBaseConfig;
 import frc.robot.Constants;
 
 public class DriveSubsys extends SubsystemBase {
-    private final SparkMax RIGHT_MOTORS;
-    private final SparkMax LEFT_MOTORS;
+    private final SparkMax RIGHT_MOTOR;
+    private final SparkMax LEFT_MOTOR;
 
     public DriveSubsys() {
         super();
 
-        RIGHT_MOTORS = Constants.MotorControllers.RIGHT_MOTOR; // Currently just a single motor. Need to set followers
-        LEFT_MOTORS = Constants.MotorControllers.LEFT_MOTOR;
+        RIGHT_MOTOR = Constants.MotorControllers.F_RIGHT_MOTOR; // Currently just a single motor. Need to set followers
+        RIGHT_FOLLOWER = Constants.MotorControllers.B_RIGHT_MOTOR.follow
+
+        LEFT_MOTOR = Constants.MotorControllers.F_LEFT_MOTOR;
     }
 
     public void drive(double leftY, double rightY) {
-        RIGHT_MOTORS.set(rightY);
-        LEFT_MOTORS.set(leftY);
+        RIGHT_MOTOR.set(rightY);
+        LEFT_MOTOR.set(leftY);
     }
 
     public void brake() {
-        RIGHT_MOTORS.set(0);
-        LEFT_MOTORS.set(0);
+        RIGHT_MOTOR.set(0);
+        LEFT_MOTOR.set(0);
     }
 }
