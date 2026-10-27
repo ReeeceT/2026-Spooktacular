@@ -21,11 +21,6 @@ public class DriveCmd extends Command {
     }
 
     @Override
-    public void initialize() {
-        
-    }
-
-    @Override
     public void execute() {
         leftY = Xbox.getLeftY();
         leftY = leftY > DigitalConstants.JOYSTICK_DEADBAND ? leftY : 0; 
@@ -34,11 +29,6 @@ public class DriveCmd extends Command {
         rightX = rightX > DigitalConstants.JOYSTICK_DEADBAND ? rightX : 0; 
 
         DS.drive(leftY, rightX);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-
     }
 
 }

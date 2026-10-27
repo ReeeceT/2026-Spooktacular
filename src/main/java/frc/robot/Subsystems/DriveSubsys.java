@@ -6,7 +6,6 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.REVLibError;
 
 import frc.robot.Constants;
 
@@ -14,6 +13,7 @@ public class DriveSubsys extends SubsystemBase {
     private final SparkMax RIGHT_SIDE;
     private final SparkMax LEFT_SIDE;
 
+    
     public DriveSubsys() {
         LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
         LEFT_SIDE.configure(
@@ -54,8 +54,8 @@ public class DriveSubsys extends SubsystemBase {
      * 
      */
     public void drive(double leftY, double rightX) {
-        // Assuming that left on the joystick is -1, and right is +1
-        // lol this is unbelievably disgusting and nearly completely unreadable
+        // Assuming that left on the joystick is -1, and right is +1, if not, just swap the signs in the ternaries
+        // lol this is unbelievably disgusting and nearly unreadable
         LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
         RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
     }

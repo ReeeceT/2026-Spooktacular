@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 
 public class ControllerBindings {
+    @SuppressWarnings({"unused"})
     private final CommandXboxController DRIVE_CONTROLLER;
 
 
