@@ -13,7 +13,6 @@ public class DriveSubsys extends SubsystemBase {
     private final SparkMax RIGHT_SIDE;
     private final SparkMax LEFT_SIDE;
 
-    
     public DriveSubsys() {
         LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
         LEFT_SIDE.configure(
