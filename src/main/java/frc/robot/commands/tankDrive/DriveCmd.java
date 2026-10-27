@@ -12,7 +12,7 @@ public class DriveCmd extends Command {
     private final CommandXboxController Xbox;
 
     private double leftY;
-    private double rightY;
+    private double rightX;
 
     public DriveCmd(DriveSubsys DS, CommandXboxController Xbox) {
         super();
@@ -29,17 +29,20 @@ public class DriveCmd extends Command {
     @Override
     public void execute() {
         leftY = Xbox.getLeftY();
-        leftY = leftY > DigitalConstants.JOYSTICK_Y_DEADBAND ? leftY : 0; // Apply Deadband
+        leftY = leftY > DigitalConstants.JOYSTICK_DEADBAND ? leftY : 0; 
 
-        rightY = Xbox.getRightY();
-        rightY = rightY > DigitalConstants.JOYSTICK_Y_DEADBAND ? rightY : 0; // Apply Deadband
+        rightX = Xbox.getRightX();
+        rightX = rightX > DigitalConstants.JOYSTICK_DEADBAND ? rightX : 0; 
 
-        DS.drive(leftY, rightY);
+        DS.drive(leftY, rightX);
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("The drive command has ended?! It shouldn't be doing that at all");
+        System.out.println("The drive command has ended?! That's bad");
+        if (interrupted == true) {
+            System.out.println("The drive command was interrupted");
+        }
     }
 
 }

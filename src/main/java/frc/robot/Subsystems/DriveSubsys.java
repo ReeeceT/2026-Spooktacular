@@ -9,34 +9,40 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.Constants;
 
 public class DriveSubsys extends SubsystemBase {
-    private final SparkMax RIGHT_MOTOR;
-    private final SparkMax LEFT_MOTOR;
+    private final SparkMax RIGHT_SIDE;
+    private final SparkMax LEFT_SIDE;
 
     public DriveSubsys() {
         super();
 
-        RIGHT_MOTOR = Constants.MotorControllers.F_RIGHT_MOTOR;
-        Constants.MotorControllers.B_RIGHT_MOTOR.configure(
+        RIGHT_SIDE = Constants.MotorControllers.FR_MOTOR;
+        Constants.MotorControllers.BR_MOTOR.configure(
             new SparkMaxConfig().follow(Constants.CAN_IDs.FR_MOTOR_ID), 
             ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
             PersistMode.kPersistParameters
         );
 
-        LEFT_MOTOR = Constants.MotorControllers.F_LEFT_MOTOR;
-        Constants.MotorControllers.B_LEFT_MOTOR.configure(
-            new SparkMaxConfig().follow(Constants.CAN_IDs.BR_MOTOR_ID), 
+        LEFT_SIDE = Constants.MotorControllers.FL_MOTOR;
+        Constants.MotorControllers.BL_MOTOR.configure(
+            new SparkMaxConfig().follow(Constants.CAN_IDs.FL_MOTOR_ID), 
             ResetMode.kResetSafeParameters, // erm why are all of the only applicable arguments all deprecated
             PersistMode.kPersistParameters
         );
     }
 
-    public void drive(double leftY, double rightY) {
-        RIGHT_MOTOR.set(rightY);
-        LEFT_MOTOR.set(leftY);
+    /**
+     * @param leftY   - Speed of each side is determined by this parameter
+     * @param rightX  - Turning is determined by this parameter
+     * 
+     */
+    public void drive(double leftY, double rightX) {
+        // Assuming that left on the joystick is -1, and right is +1
+        if (rightX < 0) LEFT_SIDE.set(leftY - Math.abs(rightX));
+        if (rightX > 0) RIGHT_SIDE.set(leftY - Math.abs(rightX));
     }
 
     public void brake() {
-        RIGHT_MOTOR.set(0);
-        LEFT_MOTOR.set(0);
+        LEFT_SIDE.set(0);
+        RIGHT_SIDE.set(0);
     }
 }
