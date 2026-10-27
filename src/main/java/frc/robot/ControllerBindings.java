@@ -4,19 +4,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controllers;
 
 public class ControllerBindings {
-    @SuppressWarnings({"unused"})
-    private final CommandXboxController DRIVE_CONTROLLER;
-
-
-    public ControllerBindings() {
-        DRIVE_CONTROLLER = Controllers.XBOX;
-
-        configureBindings();
-    }
-
+    private static final ControllerBindings INSTANCE = new ControllerBindings();
+    private final CommandXboxController DRIVE_CONTROLLER = Controllers.XBOX;
+    
     public void configureBindings() {
-        // DRIVE_CONTROLLER.rightBumper().and(DRIVE_CONTROLLER.leftBumper()).whileTrue(
-            
-        // );
+        // Put all controller bindings here
     }
+
+    public static ControllerBindings getInstance() {
+        return INSTANCE;
+    }
+
+    private ControllerBindings() {}
 }
