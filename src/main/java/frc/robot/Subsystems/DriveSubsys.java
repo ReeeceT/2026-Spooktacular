@@ -41,9 +41,9 @@ public class DriveSubsys extends SubsystemBase {
      */
     public void drive(double leftY, double rightX) {
         // Assuming that left on the joystick is -1, and right is +1
-        // lol this looks so ugly and unecessary im leaving it in
-        LEFT_SIDE.set((rightX > 0) ? (leftY - Math.abs(rightX)) : leftY);
-        RIGHT_SIDE.set((rightX < 0) ? (leftY - Math.abs(rightX)) : leftY);
+        // lol this is unbelievably disgusting and nearly completely unreadable
+        LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
+        RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
     }
 
     public void brake() {
