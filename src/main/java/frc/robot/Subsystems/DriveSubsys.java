@@ -57,6 +57,8 @@ public class DriveSubsys extends SubsystemBase {
         LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
         RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
 
+        
+
         // double leftSpeed = leftY + rightX;
         // double rightSpeed = leftY - rightX;
         

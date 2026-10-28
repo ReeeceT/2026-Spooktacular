@@ -35,6 +35,12 @@ public final class Constants {
 
     public final class DigitalConstants {
         public static final double JOYSTICK_DEADBAND = 0.1;
+
+        public enum Speeds {
+            MAX_SPEED,
+            NORMAL_SPEED,
+            TURTLE_SPEED
+        }
     }
 
     public enum CommandEnums {
