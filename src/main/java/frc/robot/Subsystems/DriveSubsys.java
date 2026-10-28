@@ -6,6 +6,7 @@ import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import edu.wpi.first.math.MathUtil;
 
 import frc.robot.Constants;
 
@@ -52,18 +53,12 @@ public class DriveSubsys extends SubsystemBase {
      * @param rightX  - Steering
      */
     public void drive(double leftY, double rightX) {
-        // Assuming that left on the joystick is -1, and right is +1, if not, just swap the signs in the ternaries
-        // lol this is unbelievably disgusting and completely unnecessary
-        LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
-        RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
+        // LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
+        // RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
 
-        
-
-        // double leftSpeed = leftY + rightX;
-        // double rightSpeed = leftY - rightX;
-        
-        // LEFT_SIDE.set(Math.clamp(leftSpeed, -1.0, 1.0));
-        // RIGHT_SIDE.set(Math.clamp(rightSpeed, -1.0, 1.0));        
+        LEFT_SIDE.set(MathUtil.clamp(leftY - rightX, -1.0, 1.0));
+        RIGHT_SIDE.set(MathUtil.clamp(leftY + rightX, -1.0, 1.0));
+      
     }
 
     public void brake() {
