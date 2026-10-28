@@ -57,14 +57,11 @@ public class DriveSubsys extends SubsystemBase {
         LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
         RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
 
-        // In case of emergency, break glass (/* */)
-        /*  
-        double leftSpeed = leftY + rightX;
-        double rightSpeed = leftY - rightX;
+        // double leftSpeed = leftY + rightX;
+        // double rightSpeed = leftY - rightX;
         
-        leftSide.set(Math.clamp(leftSpeed, -1.0, 1.0));
-        rightSide.set(Math.clamp(rightSpeed, -1.0, 1.0));
-        */
+        // LEFT_SIDE.set(Math.clamp(leftSpeed, -1.0, 1.0));
+        // RIGHT_SIDE.set(Math.clamp(rightSpeed, -1.0, 1.0));        
     }
 
     public void brake() {
