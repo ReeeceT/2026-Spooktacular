@@ -1,8 +1,8 @@
 package frc.robot.commands.tankDrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveSubsys;
 import frc.robot.Constants.DigitalConstants;
+import frc.robot.Subsystems.DriveSubsys;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class DriveCmd extends Command {
@@ -26,16 +26,16 @@ public class DriveCmd extends Command {
 
         if (Xbox.leftBumper().getAsBoolean() == true) {
             // Go slow speed if left bumper
-            leftY = Math.abs(leftY) > DigitalConstants.JOYSTICK_DEADBAND ? leftY * 0.25 : 0; 
-            rightX = Math.abs(rightX) > DigitalConstants.JOYSTICK_DEADBAND ? rightX * 0.25: 0;
+            leftY = Math.abs(leftY) < DigitalConstants.JOYSTICK_DEADBAND ? 0 : leftY * 0.25; 
+            rightX = Math.abs(rightX) < DigitalConstants.JOYSTICK_DEADBAND ? 0 :  rightX * 0.25;
         } else if (Xbox.rightBumper().getAsBoolean() == true) {
             // Go max speed if right bumper
-            leftY = Math.abs(leftY) > DigitalConstants.JOYSTICK_DEADBAND ? leftY : 0; 
-            rightX = Math.abs(rightX) > DigitalConstants.JOYSTICK_DEADBAND ? rightX : 0;
+            leftY = Math.abs(leftY) < DigitalConstants.JOYSTICK_DEADBAND ? 0 : leftY; 
+            rightX = Math.abs(rightX) < DigitalConstants.JOYSTICK_DEADBAND ? 0 : rightX;
         } else {
             // Go normal speed if nothing pressed
-            leftY = Math.abs(leftY) > DigitalConstants.JOYSTICK_DEADBAND ? leftY * 0.75 : 0; 
-            rightX = Math.abs(rightX) > DigitalConstants.JOYSTICK_DEADBAND ? rightX * 0.75: 0;
+            leftY = Math.abs(leftY) < DigitalConstants.JOYSTICK_DEADBAND ? 0 : leftY * 0.75; 
+            rightX = Math.abs(rightX) < DigitalConstants.JOYSTICK_DEADBAND ? 0 : rightX * 0.75;
         }
 
         DS.drive(leftY, rightX);

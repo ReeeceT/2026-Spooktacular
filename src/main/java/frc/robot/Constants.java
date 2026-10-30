@@ -3,7 +3,6 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.subsystems.DriveSubsys;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -11,10 +10,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 public final class Constants {
     public final class Controllers {
         public static final CommandXboxController XBOX = new CommandXboxController(0);
-    }
-
-    public final class Subsystems {
-        public static final DriveSubsys DS = new DriveSubsys();
     }
 
     public final class MotorControllers {
