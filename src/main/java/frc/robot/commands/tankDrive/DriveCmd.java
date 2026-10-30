@@ -33,30 +33,32 @@ public class DriveCmd extends Command {
         joystickY = JOYSTICK.getY();
         joystickX = JOYSTICK.getX();
 
-        if (Xbox.leftBumper().getAsBoolean() == true) {
+        if (Xbox.leftBumper().getAsBoolean()) {
             // Go slow speed if left bumper
-            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.JOYSTICK_DEADBAND ? xboxLeftY * 0.25 : 0; 
-            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.JOYSTICK_DEADBAND ? xboxRightX * 0.25: 0;
-
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.25 : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.25: 0;
-        } else if (Xbox.rightBumper().getAsBoolean() == true) {
+            // joystick only goes if trigger pressed, and also super slow cuz senstive
+            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.25 : 0; 
+            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.25 : 0;
+        } else if (Xbox.rightBumper().getAsBoolean()) {
             // Go max speed if right bumper
-            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.JOYSTICK_DEADBAND ? xboxLeftY : 0; 
-            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.JOYSTICK_DEADBAND ? xboxRightX : 0;
-
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX : 0;
-        } else {
+            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.75 : 0; 
+            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.75 : 0;
+        } else {    
             // Go normal speed if nothing pressed
-            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.JOYSTICK_DEADBAND ? xboxLeftY * 0.75 : 0; 
-            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.JOYSTICK_DEADBAND ? xboxRightX * 0.75: 0;
-
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.75 : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.75: 0;
+            xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.50 : 0; 
+            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.50 : 0;
         }
 
-        DS.drive(xboxLeftY, xboxRightX);
+        if (JOYSTICK.trigger().getAsBoolean() == true) {
+            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.25 : 0; 
+            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.25 : 0;
+        } else {
+            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0 : 0; 
+            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0 : 0;
+        }
+
+
+
+        DS.drive(xboxLeftY, xboxRightX, joystickY, joystickX);
     }
 
 }
