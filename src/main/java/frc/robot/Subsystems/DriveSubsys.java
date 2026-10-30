@@ -52,13 +52,16 @@ public class DriveSubsys extends SubsystemBase {
      * @param leftY   - Throttle
      * @param rightX  - Steering
      */
-    public void drive(double leftY, double rightX) {
+    public void drive(double leftY, double rightX, double joystickY, double joystickX) {
         double speed = -leftY; // Xbox Y axis reads negative when pushed forward
         double turn = rightX;  // Positive turns right
 
+        double joystickSpeed = -joystickY;
+        double joystickTurn = joystickX;
+
         // Left side is mounted flipped, so its output is negated
-        LEFT_SIDE.set(-MathUtil.clamp(speed - turn, -1.0, 1.0));
-        RIGHT_SIDE.set(MathUtil.clamp(speed + turn, -1.0, 1.0));
+        LEFT_SIDE.set(-MathUtil.clamp((speed - turn) + (joystickSpeed - joystickTurn), -1.0, 1.0));
+        RIGHT_SIDE.set(MathUtil.clamp((speed + turn) + (joystickSpeed + joystickTurn), -1.0, 1.0));
     }
 
     public void brake() {
