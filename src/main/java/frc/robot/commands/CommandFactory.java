@@ -9,7 +9,7 @@ import frc.robot.commands.tankDrive.DriveCmd;
 public final class CommandFactory {
     public static Command getCommand(CommandEnums cmdEnum) {
         switch (cmdEnum) {
-            case DRIVE_CMD: return new DriveCmd(Subsystems.DS, Controllers.XBOX);
+            case DRIVE_CMD: return new DriveCmd(Subsystems.DS, Controllers.XBOX, Controllers.JOYSTICK);
             
             default: return null; 
         }
