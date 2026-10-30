@@ -33,26 +33,30 @@ public class DriveCmd extends Command {
         joystickY = JOYSTICK.getY();
         joystickX = JOYSTICK.getX();
 
-        if (Xbox.leftBumper().getAsBoolean() == true || JOYSTICK.trigger().getAsBoolean()) {
+        if (Xbox.leftBumper().getAsBoolean()) {
             // Go slow speed if left bumper
             // joystick only goes if trigger pressed, and also super slow cuz senstive
             xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.25 : 0; 
-            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.25: 0;
-
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.25 : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.25: 0;
-        } else if (Xbox.rightBumper().getAsBoolean() == true || JOYSTICK.top().getAsBoolean()) {
+            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.25 : 0;
+        } else if (Xbox.rightBumper().getAsBoolean()) {
             // Go max speed if right bumper
             xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.75 : 0; 
             xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.75 : 0;
-
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.50 : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.50: 0;
         } else {    
             // Go normal speed if nothing pressed
             xboxLeftY = Math.abs(xboxLeftY) > DigitalConstants.XBOX_DEADBAND ? xboxLeftY * 0.50 : 0; 
-            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.50: 0;
+            xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.50 : 0;
         }
+
+        if (JOYSTICK.trigger().getAsBoolean()) {
+            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.25 : 0; 
+            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.25 : 0;
+        } else if (JOYSTICK.top().getAsBoolean() && JOYSTICK.trigger().getAsBoolean()) {
+            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.50 : 0; 
+            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.50 : 0;
+        }
+
+
 
         DS.drive(xboxLeftY, xboxRightX, joystickY, joystickX);
     }
