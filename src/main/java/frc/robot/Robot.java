@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.Constants.CommandEnums;
+import frc.robot.Subsystems.DriveSubsys;
 import frc.robot.commands.CommandFactory;
 
 // TODO: Reformat the Roborio and the re-deploy code
 
 public class Robot extends TimedRobot {
+    public static DriveSubsys DS;
+     
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
@@ -20,10 +23,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        
         ControllerBindings.getInstance().configureBindings();
 
         CommandScheduler.getInstance().schedule(
-            CommandFactory.getCommand(CommandEnums.DRIVE_CMD)
+            new CommandFactory().getCommand(CommandEnums.DRIVE_CMD)
         );
     }
 
@@ -33,5 +37,38 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopExit() {}
 
-    public Robot() {}
+    @Override
+    public void disabledInit() {}
+
+    @Override
+    public void disabledPeriodic() {}
+
+    @Override
+    public void disabledExit() {}
+
+    @Override
+    public void autonomousInit() {}
+
+    @Override
+    public void autonomousPeriodic() {}
+
+    @Override
+    public void autonomousExit() {}
+
+    @Override
+    public void testInit() {
+    CommandScheduler.getInstance().cancelAll();
+    }
+
+    @Override
+    public void testPeriodic() {}
+
+    @Override
+    public void testExit() {}
+
+    public Robot() {
+        DS = new DriveSubsys(); // Created once at startup so teleop re-enables don't make duplicate subsystems
+    }
+
+    
 }

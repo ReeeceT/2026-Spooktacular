@@ -1,8 +1,8 @@
 package frc.robot.commands.tankDrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveSubsys;
 import frc.robot.Constants.DigitalConstants;
+import frc.robot.Subsystems.DriveSubsys;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 

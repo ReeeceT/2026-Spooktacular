@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.Subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.SparkMax;
@@ -53,12 +53,12 @@ public class DriveSubsys extends SubsystemBase {
      * @param rightX  - Steering
      */
     public void drive(double leftY, double rightX) {
-        // LEFT_SIDE.set((rightX > 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX > 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
-        // RIGHT_SIDE.set((rightX < 0 && leftY > 0) ? (leftY - Math.abs(rightX)) : (rightX < 0 && leftY < 0) ? (leftY + Math.abs(rightX)) : leftY);
+        double speed = -leftY; // Xbox Y axis reads negative when pushed forward
+        double turn = rightX;  // Positive turns right
 
-        LEFT_SIDE.set(MathUtil.clamp(leftY - rightX, -1.0, 1.0));
-        RIGHT_SIDE.set(MathUtil.clamp(leftY + rightX, -1.0, 1.0));
-      
+        // Left side is mounted flipped, so its output is negated
+        LEFT_SIDE.set(-MathUtil.clamp(speed - turn, -1.0, 1.0));
+        RIGHT_SIDE.set(MathUtil.clamp(speed + turn, -1.0, 1.0));
     }
 
     public void brake() {
