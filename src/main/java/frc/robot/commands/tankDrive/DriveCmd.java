@@ -48,12 +48,12 @@ public class DriveCmd extends Command {
             xboxRightX = Math.abs(xboxRightX) > DigitalConstants.XBOX_DEADBAND ? xboxRightX * 0.50 : 0;
         }
 
-        if (JOYSTICK.trigger().getAsBoolean()) {
+        if (JOYSTICK.trigger().getAsBoolean() == true) {
             joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.25 : 0; 
             joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.25 : 0;
-        } else if (JOYSTICK.top().getAsBoolean() && JOYSTICK.trigger().getAsBoolean()) {
-            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0.50 : 0; 
-            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0.50 : 0;
+        } else {
+            joystickY = Math.abs(joystickY) > DigitalConstants.JOYSTICK_DEADBAND ? joystickY * 0 : 0; 
+            joystickX = Math.abs(joystickX) > DigitalConstants.JOYSTICK_DEADBAND ? joystickX * 0 : 0;
         }
 
 
